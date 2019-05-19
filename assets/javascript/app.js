@@ -14,11 +14,11 @@ var qanda = [{
         options: ["St. Louis", "Houston", "Milwaukee", "San Jose"],
         answer: 2,
     },
-    {
-        question: "Which of the following WWE Superstars goes by the nickname Ric Flair?",
-        images: ["/assets/images/Ric-Flair-WWE.jpg", "/assets/images/Randy-Savage.jpg", "/assets/images/Hulk-Hogan.jpg", "/assets/images/Andre-the-Giant.jpg"],
-        answer: 0,
-    },
+    // {
+    //     question: "Which of the following WWE Superstars goes by the nickname Ric Flair?",
+    //     images: ["/assets/images/Ric-Flair-WWE.jpg", "/assets/images/Randy-Savage.jpg", "/assets/images/Hulk-Hogan.jpg", "/assets/images/Andre-the-Giant.jpg"],
+    //     answer: 0,
+    // },
     {
         question: "Who was the first Supreme Court Justice?",
         options: ["RBG", "Alexandria Ocasio-Cortez", "Sandra Day O'Connor", "Nancy Pelosi"],
@@ -50,6 +50,25 @@ var qanda = [{
         answer: 2,
     },
 ]
+
+//question counter var to know when to reset
+var questionCounter = 0;
+
+function questionTab() {
+    if (questionCounter == 5) {
+        $(".emptyMe").empty();
+        $("#timer").remove();
+        $("#questionLine").html("Correct Guesses: " + correctGuesses + "<br>" + "Incorrect Guesses: " + incorrectGuesses);
+        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Play Again?</buton>").on("click", function () {
+            questionGenerator();
+            $("#next").empty();
+            questionCounter = 0;
+            correctGuesses = 0;
+            incorrectGuesses = 0;
+            $("#popUp").trigger("reset");
+        });
+    }
+}
 
 //countdown function
 var timeLeft = 30;
@@ -85,7 +104,7 @@ function questionGenerator() {
     $("#answer2").html(qanda[questionIndy].options[1]);
     $("#answer3").html(qanda[questionIndy].options[2]);
     $("#answer4").html(qanda[questionIndy].options[3]);
-
+    questionTab();
 }
 
 $("#popUp").on("click", function (event) {
@@ -102,6 +121,8 @@ $("#popUp").on("click", function (event) {
     $("#answer1").on("click", function () {
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 0) {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             correctGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -109,11 +130,13 @@ $("#popUp").on("click", function (event) {
             console.log("questionIndy: " + questionIndy);
             $("#questionLine").text("Correct!");
             $(".emptyMe").empty();
-            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         } else {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             incorrectGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -122,15 +145,17 @@ $("#popUp").on("click", function (event) {
             $(".emptyMe").empty();
             questionIndy = (questionIndy + 1) % qanda.length;
             console.log("questionIndy: " + questionIndy);
-            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         }
     });
     $("#answer2").on("click", function () {
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 1) {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             correctGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -138,11 +163,13 @@ $("#popUp").on("click", function (event) {
             console.log("questionIndy: " + questionIndy);
             $("#questionLine").text("Correct!");
             $(".emptyMe").empty();
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         } else {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             incorrectGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -151,15 +178,17 @@ $("#popUp").on("click", function (event) {
             $(".emptyMe").empty();
             questionIndy = (questionIndy + 1) % qanda.length;
             console.log("questionIndy: " + questionIndy);
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         }
     });
     $("#answer3").on("click", function () {
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 2) {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             correctGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -167,12 +196,14 @@ $("#popUp").on("click", function (event) {
             console.log("questionIndy: " + questionIndy);
             $("#questionLine").text("Correct!");
             $(".emptyMe").empty();
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         } else {
             incorrectGuesses++;
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
             //alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
@@ -180,15 +211,17 @@ $("#popUp").on("click", function (event) {
             $(".emptyMe").empty();
             questionIndy = (questionIndy + 1) % qanda.length;
             console.log("questionIndy: " + questionIndy);
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         }
     });
     $("#answer4").on("click", function () {
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 3) {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             correctGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -196,11 +229,13 @@ $("#popUp").on("click", function (event) {
             console.log("questionIndy: " + questionIndy);
             $("#questionLine").text("Correct!");
             $(".emptyMe").empty();
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         } else {
+            questionCounter++;
+            console.log("questionCounter: " + questionCounter);
             incorrectGuesses++;
             console.log("CorrectGuesses: " + correctGuesses);
             console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -209,9 +244,9 @@ $("#popUp").on("click", function (event) {
             $(".emptyMe").empty();
             questionIndy = (questionIndy + 1) % qanda.length;
             console.log("questionIndy: " + questionIndy);
-                        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function() {
-                questionGenerator();
+            $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
                 $("#next").empty();
+                questionGenerator();
             })
         }
     });
