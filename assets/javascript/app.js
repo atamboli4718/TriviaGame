@@ -87,41 +87,50 @@ $("#popUp").on("click", function (event) {
     $("#answer2").html(firstQuestion.options[1])
     $("#answer3").html(firstQuestion.options[2])
     $("#answer4").html(firstQuestion.options[3])
-    //click functions for the answers
-    $("#answer1").on("click", function () {
-        if (firstQuestion.answer == 0) {
-            alert("Correct!");
-            correctGuesses++;
-        } else {
-            alert("Incorrect! The correct answer was " + (firstQuestion.options[answer()]));
-            incorrectGuesses++;
-        }
-    });
-    $("#answer1").on("click", function () {
-        if (firstQuestion.answer == 0) {
-            alert("Correct!");
-            correctGuesses++;
-        } else {
-            alert("Incorrect! The correct answer was " + (firstQuestion.options[answer()]));
-            incorrectGuesses++;
-        }
-    });
-    $("#answer1").on("click", function () {
-        if (firstQuestion.answer == 0) {
-            alert("Correct!");
-            correctGuesses++;
-        } else {
-            alert("Incorrect! The correct answer was " + (firstQuestion.options[answer()]));
-            incorrectGuesses++;
-        }
-    });
-    $("#answer1").on("click", function () {
-        if (firstQuestion.answer == 0) {
-            alert("Correct!");
-            correctGuesses++;
-        } else {
-            alert("Incorrect! The correct answer was " + (firstQuestion.options[answer()]));
-            incorrectGuesses++;
-        }
-    });
+//click functions for the answers
+$("#answer1").on("click", function () {
+    console.log("answer index: "+firstQuestion.answer);
+    if (firstQuestion.answer == 0) {
+        alert("Correct!");
+        correctGuesses++;
+        console.log("correctGuesses: "+correctGuesses);
+    } else {
+        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
+        incorrectGuesses++;
+        console.log("incorrectGuesses: "+incorrectGuesses);
+    }
+});
+$("#answer2").on("click", function () {
+    if (firstQuestion.answer == 1) {
+        alert("Correct!");
+        correctGuesses++;
+        console.log("correctGuesses: "+correctGuesses);
+    } else {
+        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
+        incorrectGuesses++;
+        console.log("incorrectGuesses: "+incorrectGuesses);
+    }
+});
+$("#answer3").on("click", function () {
+    if (firstQuestion.answer == 2) {
+        alert("Correct!");
+        correctGuesses++;
+        console.log("correctGuesses: "+correctGuesses);
+    } else {
+        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
+        incorrectGuesses++;
+        console.log("incorrectGuesses: "+incorrectGuesses);
+    }
+});
+$("#answer4").on("click", function () {
+    if (firstQuestion.answer == 3) {
+        alert("Correct!");
+        correctGuesses++;
+        console.log("correctGuesses: "+correctGuesses);
+    } else {
+        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
+        incorrectGuesses++;
+        console.log("incorrectGuesses: "+incorrectGuesses);
+    }
+});
 })
