@@ -57,7 +57,7 @@ var questionCounter = 0;
 function questionTab() {
     if (questionCounter == 5) {
         $(".emptyMe").empty();
-        $("#timer").remove();
+        $("#timer").html("----");
         $("#questionLine").html("Correct Guesses: " + correctGuesses + "<br>" + "Incorrect Guesses: " + incorrectGuesses);
         $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Play Again?</buton>").on("click", function () {
             questionGenerator();
@@ -65,7 +65,8 @@ function questionTab() {
             questionCounter = 0;
             correctGuesses = 0;
             incorrectGuesses = 0;
-            $("#popUp").trigger("reset");
+            countdown();
+            startButton();
         });
     }
 }
@@ -108,7 +109,7 @@ function questionGenerator() {
 }
 
 $("#popUp").on("click", function (event) {
-    $("#popUp").remove();
+    $("#popUp").hide();
 
     //countdown(); not needed here because the countdown function is called below
     var timerId = setInterval(countdown, 1000);
