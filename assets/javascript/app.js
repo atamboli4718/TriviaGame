@@ -81,56 +81,75 @@ $("#popUp").on("click", function (event) {
     //countdown(); not needed here because the countdown function is called below
     var timerId = setInterval(countdown, 1000);
     //generate a random question from the qanda var and assign it to the webpage
-    var firstQuestion = qanda[Math.floor(Math.random() * qanda.length)];
-    $("#questionLine").html(firstQuestion.question);
-    $("#answer1").html(firstQuestion.options[0])
-    $("#answer2").html(firstQuestion.options[1])
-    $("#answer3").html(firstQuestion.options[2])
-    $("#answer4").html(firstQuestion.options[3])
+    var questionIndy = Math.floor(Math.random() * qanda.length);
+    $("#questionLine").html(qanda[questionIndy].question);
+    $("#answer1").html(qanda[questionIndy].options[0]);
+    $("#answer2").html(qanda[questionIndy].options[1]);
+    $("#answer3").html(qanda[questionIndy].options[2]);
+    $("#answer4").html(qanda[questionIndy].options[3]);
 //click functions for the answers
-$("#answer1").on("click", function () {
-    console.log("answer index: "+firstQuestion.answer);
-    if (firstQuestion.answer == 0) {
-        alert("Correct!");
-        correctGuesses++;
-        console.log("correctGuesses: "+correctGuesses);
-    } else {
-        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
-        incorrectGuesses++;
-        console.log("incorrectGuesses: "+incorrectGuesses);
-    }
-});
-$("#answer2").on("click", function () {
-    if (firstQuestion.answer == 1) {
-        alert("Correct!");
-        correctGuesses++;
-        console.log("correctGuesses: "+correctGuesses);
-    } else {
-        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
-        incorrectGuesses++;
-        console.log("incorrectGuesses: "+incorrectGuesses);
-    }
-});
-$("#answer3").on("click", function () {
-    if (firstQuestion.answer == 2) {
-        alert("Correct!");
-        correctGuesses++;
-        console.log("correctGuesses: "+correctGuesses);
-    } else {
-        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
-        incorrectGuesses++;
-        console.log("incorrectGuesses: "+incorrectGuesses);
-    }
-});
-$("#answer4").on("click", function () {
-    if (firstQuestion.answer == 3) {
-        alert("Correct!");
-        correctGuesses++;
-        console.log("correctGuesses: "+correctGuesses);
-    } else {
-        alert("Incorrect! The correct answer was " + firstQuestion.options[firstQuestion.answer]);
-        incorrectGuesses++;
-        console.log("incorrectGuesses: "+incorrectGuesses);
-    }
-});
+    $("#answer1").on("click", function () {
+        console.log("answer index: "+qanda[questionIndy].answer);
+        if (qanda[questionIndy].answer == 0) {
+            correctGuesses++;
+            console.log("correctGuesses: "+correctGuesses);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+            alert("Correct!");
+        } else {
+            incorrectGuesses++;
+            console.log("incorrectGuesses: "+incorrectGuesses);
+            alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+        }
+    });
+    $("#answer2").on("click", function () {
+        console.log("answer index: "+qanda[questionIndy].answer);
+        if (qanda[questionIndy].answer == 1) {
+            correctGuesses++;
+            console.log("correctGuesses: "+correctGuesses);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+            alert("Correct!");
+        } else {
+            incorrectGuesses++;
+            console.log("incorrectGuesses: "+incorrectGuesses);
+            alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+        }
+    });
+    $("#answer3").on("click", function () {
+        console.log("answer index: "+qanda[questionIndy].answer);
+        if (qanda[questionIndy].answer == 2) {
+            correctGuesses++;
+            console.log("correctGuesses: "+correctGuesses);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+            alert("Correct!");
+        } else {
+            incorrectGuesses++;
+            console.log("incorrectGuesses: "+incorrectGuesses);
+            alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+        }
+    });
+    $("#answer4").on("click", function () {
+        console.log("answer index: "+qanda[questionIndy].answer);
+        if (qanda[questionIndy].answer == 3) {
+            correctGuesses++;
+            console.log("correctGuesses: "+correctGuesses);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+            alert("Correct!");
+        } else {
+            incorrectGuesses++;
+            console.log("incorrectGuesses: "+incorrectGuesses);
+            alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
+            questionIndy=(questionIndy+1) % qanda.length;
+            console.log("questionIndy: "+ questionIndy);
+        }
+    });
 })
