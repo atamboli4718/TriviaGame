@@ -57,15 +57,15 @@ var questionCounter = 0;
 function questionTab() {
     if (questionCounter == 5) {
         $(".emptyMe").empty();
-        $("#timer").html("----");
+        clearInterval(timerId)
         $("#questionLine").html("Correct Guesses: " + correctGuesses + "<br>" + "Incorrect Guesses: " + incorrectGuesses);
         $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Play Again?</buton>").on("click", function () {
-            questionGenerator();
+            //questionGenerator();
             $("#next").empty();
             questionCounter = 0;
             correctGuesses = 0;
             incorrectGuesses = 0;
-            countdown();
+            $("#timer").html("----");
             startButton();
         });
     }
@@ -76,8 +76,9 @@ var timeLeft = 30;
 
 function countdown() {
     if (timeLeft == 0) {
-        clearTimeout(timerId)
-        alert("You're out of time! The correct answer was...")
+        clearInterval(timerId)
+        alert("You're out of time! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
+        incorrectGuesses++;
     } else {
         $("#timer").html(timeLeft + " Seconds remaining")
         timeLeft--;
@@ -99,6 +100,8 @@ var incorrectGuesses = 0;
 //variable to hold the index of the qanda var referenced
 var questionIndy;
 
+var timerId;
+
 function questionGenerator() {
     $("#questionLine").html(qanda[questionIndy].question);
     $("#answer1").html(qanda[questionIndy].options[0]);
@@ -107,7 +110,8 @@ function questionGenerator() {
     $("#answer4").html(qanda[questionIndy].options[3]);
     questionTab();
     //countdown(); not needed here because the countdown function is called below
-    var timerId = setInterval(countdown, 1000);
+    timerId = setInterval(countdown, 1000);
+    timeLeft = 30;
 }
 
 $("#popUp").on("click", function (event) {
@@ -119,7 +123,7 @@ $("#popUp").on("click", function (event) {
 
     //click functions for the answers
     $("#answer1").on("click", function () {
-        $("#timer").html("----");
+        clearInterval(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 0) {
             questionCounter++;
@@ -153,7 +157,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer2").on("click", function () {
-        $("#timer").html("----");
+        clearInterval(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 1) {
             questionCounter++;
@@ -187,7 +191,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer3").on("click", function () {
-        $("#timer").html("----");
+        clearInterval(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 2) {
             questionCounter++;
@@ -221,7 +225,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer4").on("click", function () {
-        $("#timer").html("----");
+        clearInterval(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 3) {
             questionCounter++;
