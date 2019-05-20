@@ -106,13 +106,12 @@ function questionGenerator() {
     $("#answer3").html(qanda[questionIndy].options[2]);
     $("#answer4").html(qanda[questionIndy].options[3]);
     questionTab();
+    //countdown(); not needed here because the countdown function is called below
+    var timerId = setInterval(countdown, 1000);
 }
 
 $("#popUp").on("click", function (event) {
     $("#popUp").hide();
-
-    //countdown(); not needed here because the countdown function is called below
-    var timerId = setInterval(countdown, 1000);
 
     //generate a random question from the qanda var and assign it to the webpage
     questionIndy = Math.floor(Math.random() * qanda.length);
@@ -120,6 +119,7 @@ $("#popUp").on("click", function (event) {
 
     //click functions for the answers
     $("#answer1").on("click", function () {
+        $("#timer").html("----");
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 0) {
             questionCounter++;
@@ -153,6 +153,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer2").on("click", function () {
+        $("#timer").html("----");
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 1) {
             questionCounter++;
@@ -186,6 +187,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer3").on("click", function () {
+        $("#timer").html("----");
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 2) {
             questionCounter++;
@@ -219,6 +221,7 @@ $("#popUp").on("click", function (event) {
         }
     });
     $("#answer4").on("click", function () {
+        $("#timer").html("----");
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 3) {
             questionCounter++;
