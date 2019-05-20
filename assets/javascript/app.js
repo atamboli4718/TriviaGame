@@ -106,7 +106,7 @@ var timeLeft = 30;
 
 function countdown() {
     if (timeLeft == 0) {
-        clearInterval(timerId)
+        clearInterval(timerId);
         incorrectGuesses++;
         console.log("CorrectGuesses: " + correctGuesses);
         console.log("IncorrectGuesses: " + incorrectGuesses);
@@ -162,6 +162,7 @@ $("#popUp").on("click", function (event) {
     //click functions for the answers
     $("#answer1").on("click", function () {
         clearInterval(timerId);
+        console.log(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 0) {
             questionCounter++;
@@ -196,6 +197,7 @@ $("#popUp").on("click", function (event) {
     });
     $("#answer2").on("click", function () {
         clearInterval(timerId);
+        console.log(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 1) {
             questionCounter++;
@@ -230,6 +232,7 @@ $("#popUp").on("click", function (event) {
     });
     $("#answer3").on("click", function () {
         clearInterval(timerId);
+        console.log(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 2) {
             questionCounter++;
@@ -264,6 +267,7 @@ $("#popUp").on("click", function (event) {
     });
     $("#answer4").on("click", function () {
         clearInterval(timerId);
+        console.log(timerId);
         console.log("answer index: " + qanda[questionIndy].answer);
         if (qanda[questionIndy].answer == 3) {
             questionCounter++;
