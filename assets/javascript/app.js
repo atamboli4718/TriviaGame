@@ -79,6 +79,8 @@ function countdown() {
         clearInterval(timerId)
         alert("You're out of time! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
         incorrectGuesses++;
+        console.log("CorrectGuesses: " + correctGuesses);
+        console.log("IncorrectGuesses: " + incorrectGuesses);
     } else {
         $("#timer").html(timeLeft + " Seconds remaining")
         timeLeft--;
