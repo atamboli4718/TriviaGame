@@ -30,6 +30,36 @@ var qanda = [{
         answer: 1,
     },
     {
+        question: "What’s the real name of Siddartha Gautama?",
+        options: ["Buddah", "Alexander the Great", "Barrack Obama", "John Legend"],
+        answer: 0,
+    },
+    {
+        question: "What nationality was Marco Polo?",
+        options: ["Chinese", "Polish", "Spanish", "Italian"],
+        answer: 3,
+    },
+    {
+        question: "Who said E=mc^2?",
+        options: ["Ada Lovelace", "Einstein", "Isaac Newton", "John Legend"],
+        answer: 1,
+    },
+    {
+        question: "Who was Henry VII's daughter?",
+        options: ["Elizabeth", "Catherine of Aragon", "Marie Antionette", "Bloody Mary"],
+        answer: 3,
+    },
+    {
+        question: "Which artist made his name with paintings of soup cans and Coca-Cola bottles?",
+        options: ["Henri Matisse", "Edvard Munch", "Andy Warhol", "Renoir"],
+        answer: 2,
+    },
+    {
+        question: "Who lived at 221B, Baker Street, London?",
+        options: ["Guy Ferrari", "Sherlock Holmes", "Dr. Who", "Kate Middleton"],
+        answer: 1,
+    },
+    {
         question: "Who was Kim Kardashian's first husband?",
         options: ["Jason Momoa", "Kevin Federline", "Kris Humphries", "Damon Thomas"],
         answer: 3,
@@ -77,10 +107,16 @@ var timeLeft = 30;
 function countdown() {
     if (timeLeft == 0) {
         clearInterval(timerId)
-        alert("You're out of time! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
         incorrectGuesses++;
         console.log("CorrectGuesses: " + correctGuesses);
         console.log("IncorrectGuesses: " + incorrectGuesses);
+        $("#questionLine").empty();
+        $(".emptyMe").empty();
+        $("#timer").text("----");
+        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Your out of time!</buton>").on("click", function () {
+            $("#next").empty();
+            questionGenerator();
+        })
     } else {
         $("#timer").html(timeLeft + " Seconds remaining")
         timeLeft--;
