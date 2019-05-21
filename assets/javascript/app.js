@@ -128,7 +128,7 @@ function questionGenerator() {
     $("#answer3").html(qanda[questionIndy].options[2]);
     $("#answer4").html(qanda[questionIndy].options[3]);
     questionTab();
-    console.log(questionCounter);
+    console.log("questionCounter: " + questionCounter);
 };
 
 //click functions for the answers
