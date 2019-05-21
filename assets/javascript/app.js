@@ -45,7 +45,7 @@ var qanda = [{
         answer: 1,
     },
     {
-        question: "Who was Henry VII's daughter?",
+        question: "Who was Henry VIII's daughter?",
         options: ["Elizabeth", "Catherine of Aragon", "Marie Antionette", "Bloody Mary"],
         answer: 3,
     },
@@ -83,63 +83,44 @@ var qanda = [{
 
 //question counter var to know when to reset
 var questionCounter = 0;
+var timeLeft = 30;
+//vars to track correct guesses and incorrect guesses
+var correctGuesses = 0;
+var incorrectGuesses = 0;
+//variable to hold the index of the qanda var referenced
+var questionIndy;
+//var for timerId
+var timerId;
 
-function questionTab() {
-    if (questionCounter == 5) {
-        $(".emptyMe").empty();
-        clearInterval(timerId)
-        $("#questionLine").html("Correct Guesses: " + correctGuesses + "<br>" + "Incorrect Guesses: " + incorrectGuesses);
-        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Play Again?</buton>").on("click", function () {
-            //questionGenerator();
-            $("#next").empty();
-            questionCounter = 0;
-            correctGuesses = 0;
-            incorrectGuesses = 0;
-            $("#timer").html("----");
-            startButton();
-        });
-    }
-}
+//click function for when clicking on start
+$("#popUp").on("click", function (event) {
+    $("#popUp").empty();
+    //generate a random question from the qanda var and assign it to the webpage
+    questionIndy = Math.floor(Math.random() * qanda.length);
+    questionGenerator();
+
+})
 
 //countdown function
-var timeLeft = 30;
-
 function countdown() {
     if (timeLeft == 0) {
         clearInterval(timerId);
+        questionCounter++;
+        console.log("questionCounter: " + questionCounter);
         incorrectGuesses++;
         console.log("CorrectGuesses: " + correctGuesses);
         console.log("IncorrectGuesses: " + incorrectGuesses);
         $("#questionLine").empty();
         $(".emptyMe").empty();
         $("#timer").text("----");
-        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>You're out of time!</buton>").on("click", function () {
-            $("#next").empty();
-            questionGenerator();
-        })
+        $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>You're out of time!</buton>");
     } else {
         $("#timer").html(timeLeft + " Seconds remaining")
         timeLeft--;
     }
 }
 
-// create a click event for start button
-function startButton() {
-    $("#popUp").text("Start")
-}
-
-//calls start button function
-startButton();
-
-//vars to track correct guesses and incorrect guesses
-var correctGuesses = 0;
-var incorrectGuesses = 0;
-
-//variable to hold the index of the qanda var referenced
-var questionIndy;
-
-var timerId;
-
+//function population the question and answer buttons
 function questionGenerator() {
     $("#questionLine").html(qanda[questionIndy].question);
     $("#answer1").html(qanda[questionIndy].options[0]);
@@ -147,26 +128,105 @@ function questionGenerator() {
     $("#answer3").html(qanda[questionIndy].options[2]);
     $("#answer4").html(qanda[questionIndy].options[3]);
     questionTab();
-    //countdown(); not needed here because the countdown function is called below
-    timerId = setInterval(countdown, 1000);
-    timeLeft = 30;
+    console.log(questionCounter);
+};
+
+//click functions for the answers
+$("#answer1").on("click", function () {
+    clearInterval(timerId);
+    console.log("timerId: " + timerId);
+    console.log("answer index: " + qanda[questionIndy].answer);
+    if (qanda[questionIndy].answer == 0) {
+        correct();
+    } else {
+        incorrect();
+    }
+});
+$("#answer2").on("click", function () {
+    clearInterval(timerId);
+    console.log("timerId: " + timerId);
+    console.log("answer index: " + qanda[questionIndy].answer);
+    if (qanda[questionIndy].answer == 1) {
+        correct();
+    } else {
+        incorrect();
+    }
+});
+$("#answer3").on("click", function () {
+    clearInterval(timerId);
+    console.log("timerId: " + timerId);
+    console.log("answer index: " + qanda[questionIndy].answer);
+    if (qanda[questionIndy].answer == 2) {
+        correct();
+    } else {
+        incorrect();
+    }
+});
+$("#answer4").on("click", function () {
+    clearInterval(timerId);
+    console.log("timerId: " + timerId);
+    console.log("answer index: " + qanda[questionIndy].answer);
+    if (qanda[questionIndy].answer == 3) {
+        correct();
+    } else {
+        incorrect();
+    }
+});
+
+//keeps track of total questions completed
+function questionTab() {
+    if (questionCounter == 5) {
+        $(".emptyMe").empty();
+        clearInterval(timerId);
+        $("#timer").text("----");
+        $("#questionLine").html("Correct Guesses: " + correctGuesses + "<br>" + "Incorrect Guesses: " + incorrectGuesses);
+        $("#startOver").show();
+        $("#startOver").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Play Again?</buton>");
+    }
+    else {
+        timerId = setInterval(countdown, 1000);
+        timeLeft = 30;    
+    }
 }
 
+//for starting over when clicking on the Play Again button
+$("#startOver").on("click",function(){
+    //questionGenerator();
+    $("#startOver").hide();
+    $("#questionLine").empty();
+    clearInterval(timerId);
+    $("#timer").text("----");  
+    questionCounter = 0;
+    correctGuesses = 0;
+    incorrectGuesses = 0; 
+    startButton();  
+})
+
+// function to populate start button after completeing one round
+function startButton() {
+    $("#popUp").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5' id='popUp'>Start</button>");
+}
+
+
+//function for when you click on next question or out of time to move to next question
+$("#next").on("click",function(){
+        $("#next").empty();
+        questionIndy = (questionIndy + 1) % qanda.length;
+        questionGenerator();
+});
+
+//functions for when an answer is correct or incorrect
 function correct() {
     questionCounter++;
     console.log("questionCounter: " + questionCounter);
     correctGuesses++;
     console.log("CorrectGuesses: " + correctGuesses);
     console.log("IncorrectGuesses: " + incorrectGuesses);
-    questionIndy = (questionIndy + 1) % qanda.length;
     console.log("questionIndy: " + questionIndy);
     $("#questionLine").text("Correct!");
     $(".emptyMe").empty();
-    $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
-        $("#next").empty();
-        questionGenerator();
-    })
-}
+    $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>");
+};
 
 function incorrect() {
     questionCounter++;
@@ -177,61 +237,8 @@ function incorrect() {
     //alert("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
     $("#questionLine").text("Incorrect! The correct answer was " + qanda[questionIndy].options[qanda[questionIndy].answer]);
     $(".emptyMe").empty();
-    questionIndy = (questionIndy + 1) % qanda.length;
     console.log("questionIndy: " + questionIndy);
-    $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>").on("click", function () {
-        $("#next").empty();
-        questionGenerator();
-    })
-}
-
-
-$("#popUp").on("click", function (event) {
-    $("#popUp").hide();
-
-    //generate a random question from the qanda var and assign it to the webpage
-    questionIndy = Math.floor(Math.random() * qanda.length);
-    questionGenerator();
-
-    //click functions for the answers
-    $("#answer1").on("click", function () {
-        clearInterval(timerId);
-        console.log("timerId: " + timerId);
-        console.log("answer index: " + qanda[questionIndy].answer);
-        if (qanda[questionIndy].answer == 0) {
-            correct();
-        } else {
-            incorrect();
-        }
-    });
-    $("#answer2").on("click", function () {
-        clearInterval(timerId);
-        console.log("timerId: " + timerId);
-        console.log("answer index: " + qanda[questionIndy].answer);
-        if (qanda[questionIndy].answer == 1) {
-            correct();
-        } else {
-            incorrect();
-        }
-    });
-    $("#answer3").on("click", function () {
-        clearInterval(timerId);
-        console.log("timerId: " + timerId);
-        console.log("answer index: " + qanda[questionIndy].answer);
-        if (qanda[questionIndy].answer == 2) {
-            correct();
-        } else {
-            incorrect();
-        }
-    });
-    $("#answer4").on("click", function () {
-        clearInterval(timerId);
-        console.log("timerId: " + timerId);
-        console.log("answer index: " + qanda[questionIndy].answer);
-        if (qanda[questionIndy].answer == 3) {
-            correct();
-        } else {
-            incorrect();
-        }
-    });
-})
+    $("#next").html("<button type='button' class='btn btn-secondary btn-lg btn-block mt-5'>Next Question</buton>");
+};
+//calls start button function
+startButton();
