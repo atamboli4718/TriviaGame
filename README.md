@@ -16,7 +16,11 @@ We dove into JavaScript timing functions which are used everywhere in applicatio
 * setTimeout
 * setInterval
 
-## Learning Objectives
+## Objectives
 * Utilize timers to build JavaScript programs that execute functionality at various times.
 * Utilize web inspector to debug JavaScript and jQuery scripts.
 * Conceptualize problems and pseudocode a plan to break down and approach complex problems.
+
+## Contact Me 
+Cell: 251-689-1409
+Email: atamboli4718@gmail.com

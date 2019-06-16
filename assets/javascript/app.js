@@ -132,10 +132,10 @@ function questionGenerator() {
     if ((qanda[questionIndy].image) == true) {
         $("#questionLine").html(qanda[questionIndy].question);
         console.log("you're in");
-        $("#answer1").html("<img src='"+qanda[questionIndy].options[0]+"' width=100%>");
-        $("#answer2").html("<img src='"+qanda[questionIndy].options[1]+"' width=100%>");
-        $("#answer3").html("<img src='"+qanda[questionIndy].options[2]+"' width=100%>");
-        $("#answer4").html("<img src='"+qanda[questionIndy].options[3]+"' width=100%>");
+        $("#answer1").html("<img src='"+qanda[questionIndy].options[0]+"' height=50px>");
+        $("#answer2").html("<img src='"+qanda[questionIndy].options[1]+"' height=50px>");
+        $("#answer3").html("<img src='"+qanda[questionIndy].options[2]+"' height=50px>");
+        $("#answer4").html("<img src='"+qanda[questionIndy].options[3]+"' height=50px>");
     }else {
         $("#questionLine").html(qanda[questionIndy].question);
         $("#answer1").html(qanda[questionIndy].options[0]);
