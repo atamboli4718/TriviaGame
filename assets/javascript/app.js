@@ -1,89 +1,94 @@
-/* psuedo code:
-- create a var for correct gueses
-- create a var for incorrect guesses
-- create a timer to start on start button and display first question
-    - if not answered in 30 seconds, display message "Time's up! the correct answer was XXX" with a "next question button", add one to incorrect guesses
-    - if answered in time alloted, but not correct, display message "Incorrect. The correct answer was xxx" with a "next question button", add one to incorrect guesses
-    - if answered in the time alloted and it was correct, display message "Correct!" with a "next question button", add one to correct guesses.
-- when "next question" button clicked, move to the next question. iterate through loop 4 more times. 
-- on last question, instead of "next question" button, display a "Play again?" button that displays the total numbers in the incorrect guesses and the correct guesses vars. When clicked start game over
-*/
 
-var qanda = [{
+var qanda = [
+    {
         question: "What city in the United States is nicknamed Brew City?",
         options: ["St. Louis", "Houston", "Milwaukee", "San Jose"],
         answer: 2,
+        image: false,
     },
-    // {
-    //     question: "Which of the following WWE Superstars goes by the nickname Ric Flair?",
-    //     images: ["/assets/images/Ric-Flair-WWE.jpg", "/assets/images/Randy-Savage.jpg", "/assets/images/Hulk-Hogan.jpg", "/assets/images/Andre-the-Giant.jpg"],
-    //     answer: 0,
-    // },
+    {
+         question: "Which of the following WWE Superstars goes by the nickname Ric Flair?",
+         options: ["assets/images/Ric-Flair-WWE.jpg", "assets/images/Randy-Savage.jpg", "assets/images/Hulk-Hogan.jpg", "assets/images/Andre-the-Giant.jpg"],
+         answer: 0,
+         image: true,
+    },
     {
         question: "Who was the first Supreme Court Justice?",
         options: ["RBG", "Alexandria Ocasio-Cortez", "Sandra Day O'Connor", "Nancy Pelosi"],
         answer: 2,
+        image: false,
     },
     {
         question: "At the beginning of GoT, how many Stark children were there?",
         options: ["3", "5", "7", "9"],
         answer: 1,
+        image: false,
     },
     {
         question: "What’s the real name of Siddartha Gautama?",
         options: ["Buddah", "Alexander the Great", "Barrack Obama", "John Legend"],
         answer: 0,
+        image: false,
     },
     {
         question: "What nationality was Marco Polo?",
         options: ["Chinese", "Polish", "Spanish", "Italian"],
         answer: 3,
+        image: false,
     },
     {
         question: "Who said E=mc^2?",
         options: ["Ada Lovelace", "Einstein", "Isaac Newton", "John Legend"],
         answer: 1,
+        image: false,
     },
     {
         question: "Who was Henry VIII's daughter?",
         options: ["Elizabeth", "Catherine of Aragon", "Marie Antionette", "Bloody Mary"],
         answer: 3,
+        image: false,
     },
     {
         question: "Which artist made his name with paintings of soup cans and Coca-Cola bottles?",
         options: ["Henri Matisse", "Edvard Munch", "Andy Warhol", "Renoir"],
         answer: 2,
+        image: false,
     },
     {
         question: "Who lived at 221B, Baker Street, London?",
         options: ["Guy Ferrari", "Sherlock Holmes", "Dr. Who", "Kate Middleton"],
         answer: 1,
+        image: false,
     },
     {
         question: "Who was Kim Kardashian's first husband?",
         options: ["Jason Momoa", "Kevin Federline", "Kris Humphries", "Damon Thomas"],
         answer: 3,
+        image: false,
     },
     {
         question: "What is Charlotte's NBA team?",
         options: ["Lakers", "Hornets", "76ers", "Kings"],
         answer: 1,
+        image: false,
     },
     {
         question: "Which of the following is a fruit?",
         options: ["Cucumber", "Tomatoe", "Eggplant", "All of the above"],
         answer: 3,
+        image: false,
     },
     {
         question: "Who is the richest of the following?",
         options: ["Warren Buffet", "Bernard Arnault", "Jeff Bezos", "Bill Gates"],
         answer: 2,
+        image: false,
     },
 ]
 
 //question counter var to know when to reset
 var questionCounter = 0;
-var timeLeft = 30;
+var timeLeft = 10;
 //vars to track correct guesses and incorrect guesses
 var correctGuesses = 0;
 var incorrectGuesses = 0;
@@ -122,11 +127,22 @@ function countdown() {
 
 //function population the question and answer buttons
 function questionGenerator() {
-    $("#questionLine").html(qanda[questionIndy].question);
-    $("#answer1").html(qanda[questionIndy].options[0]);
-    $("#answer2").html(qanda[questionIndy].options[1]);
-    $("#answer3").html(qanda[questionIndy].options[2]);
-    $("#answer4").html(qanda[questionIndy].options[3]);
+    //debugger;
+    //if statement for if the picture question comes up
+    if ((qanda[questionIndy].image) == true) {
+        $("#questionLine").html(qanda[questionIndy].question);
+        console.log("you're in");
+        $("#answer1").html("<img src='"+qanda[questionIndy].options[0]+"' width=100%>");
+        $("#answer2").html("<img src='"+qanda[questionIndy].options[1]+"' width=100%>");
+        $("#answer3").html("<img src='"+qanda[questionIndy].options[2]+"' width=100%>");
+        $("#answer4").html("<img src='"+qanda[questionIndy].options[3]+"' width=100%>");
+    }else {
+        $("#questionLine").html(qanda[questionIndy].question);
+        $("#answer1").html(qanda[questionIndy].options[0]);
+        $("#answer2").html(qanda[questionIndy].options[1]);
+        $("#answer3").html(qanda[questionIndy].options[2]);
+        $("#answer4").html(qanda[questionIndy].options[3]);
+    }
     questionTab();
     console.log("questionCounter: " + questionCounter);
 };
@@ -185,7 +201,7 @@ function questionTab() {
     }
     else {
         timerId = setInterval(countdown, 1000);
-        timeLeft = 30;    
+        timeLeft = 10;    
     }
 }
 
